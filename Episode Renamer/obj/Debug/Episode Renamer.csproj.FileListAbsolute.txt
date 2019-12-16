@@ -1,0 +1,9 @@
+C:\Users\Edenl\source\repos\Episode Renamer\Episode Renamer\bin\Debug\Episode Renamer.exe.config
+C:\Users\Edenl\source\repos\Episode Renamer\Episode Renamer\bin\Debug\Episode Renamer.exe
+C:\Users\Edenl\source\repos\Episode Renamer\Episode Renamer\bin\Debug\Episode Renamer.pdb
+C:\Users\Edenl\source\repos\Episode Renamer\Episode Renamer\obj\Debug\Episode Renamer.csprojAssemblyReference.cache
+C:\Users\Edenl\source\repos\Episode Renamer\Episode Renamer\obj\Debug\Episode_Renamer.Form1.resources
+C:\Users\Edenl\source\repos\Episode Renamer\Episode Renamer\obj\Debug\Episode_Renamer.Properties.Resources.resources
+C:\Users\Edenl\source\repos\Episode Renamer\Episode Renamer\obj\Debug\Episode Renamer.csproj.GenerateResource.cache
+C:\Users\Edenl\source\repos\Episode Renamer\Episode Renamer\obj\Debug\Episode Renamer.exe
+C:\Users\Edenl\source\repos\Episode Renamer\Episode Renamer\obj\Debug\Episode Renamer.pdb
