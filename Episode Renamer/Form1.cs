@@ -11,6 +11,7 @@ namespace Episode_Renamer
         private readonly RegistryKey _rk1 = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\CLASSES\Folder\shell\Episode Renamer\command");
         private readonly RegistryKey _key;
 
+
         public Form1()
         {
             InitializeComponent();
@@ -56,6 +57,14 @@ namespace Episode_Renamer
         private void TextBox1_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Copy : DragDropEffects.None;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Do you want to delete shell command", "Episode Renamer", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                Registry.LocalMachine.DeleteSubKeyTree(@"SOFTWARE\CLASSES\Folder\shell\Episode Renamer");
+            }
         }
     }
 }
