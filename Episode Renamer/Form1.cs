@@ -74,9 +74,22 @@ namespace Episode_Renamer
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(@"Do you want to delete shell command", @"Episode Renamer", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (_rk is null)
             {
-                Registry.LocalMachine.DeleteSubKeyTree(@"SOFTWARE\CLASSES\Folder\shell\Episode Renamer");
+                if (MessageBox.Show(@"Do you want to create shell command", @"Episode Renamer", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    Registry.LocalMachine.CreateSubKey(@"SOFTWARE\CLASSES\Folder\shell\Episode Renamer");
+                    var key = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\CLASSES\Folder\shell\Episode Renamer\command");
+                    key?.SetValue("", Application.StartupPath + @"\Episode Renamer.exe " + "\"" + "%1" + "\"");
+                    key?.Close();
+                }
+            }
+            else
+            {
+                if (MessageBox.Show(@"Do you want to delete shell command", @"Episode Renamer", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    Registry.LocalMachine.DeleteSubKeyTree(@"SOFTWARE\CLASSES\Folder\shell\Episode Renamer");
+                }
             }
         }
     }
