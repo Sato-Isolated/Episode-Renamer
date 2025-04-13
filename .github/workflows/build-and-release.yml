@@ -12,27 +12,22 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '4.8.x'
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1
     
-    - name: Restore dependencies
-      run: dotnet restore "Episode Renamer.sln"
+    - name: Restore NuGet packages
+      run: nuget restore "Episode Renamer.sln"
     
     - name: Build
-      run: dotnet build "Episode Renamer.sln" --configuration Release --no-restore
-    
-    - name: Publish
-      run: dotnet publish "Episode Renamer/Episode Renamer.csproj" --configuration Release --output ./publish
+      run: msbuild "Episode Renamer.sln" /p:Configuration=Release /p:Platform="Any CPU" /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
     
     - name: Create Release
       id: create_release
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          ./publish/Episode Renamer.exe
-          ./publish/*
+          ./Episode Renamer/bin/Release/Episode Renamer.exe
+          ./Episode Renamer/bin/Release/*
         draft: false
         prerelease: false
         generate_release_notes: true
