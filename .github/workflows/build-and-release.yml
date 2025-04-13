@@ -1,0 +1,48 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '4.8.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore "Episode Renamer.sln"
+    
+    - name: Build
+      run: dotnet build "Episode Renamer.sln" --configuration Release --no-restore
+    
+    - name: Publish
+      run: dotnet publish "Episode Renamer/Episode Renamer.csproj" --configuration Release --output ./publish
+    
+    - name: Create Release
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          ./publish/Episode Renamer.exe
+          ./publish/*
+        draft: false
+        prerelease: false
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "Update build artifacts [skip ci]" || echo "No changes to commit"
+        git push 
