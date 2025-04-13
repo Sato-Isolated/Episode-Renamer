@@ -19,7 +19,7 @@ jobs:
       run: nuget restore "Episode Renamer.sln"
     
     - name: Build
-      run: msbuild "Episode Renamer.sln" /p:Configuration=Release /p:Platform="Any CPU" /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+      run: msbuild "Episode Renamer.sln" /p:Configuration=Release /p:Platform="Any CPU"
     
     - name: Create Release
       id: create_release
@@ -27,7 +27,8 @@ jobs:
       with:
         files: |
           ./Episode Renamer/bin/Release/Episode Renamer.exe
-          ./Episode Renamer/bin/Release/*
+          ./Episode Renamer/bin/Release/Episode Renamer.exe.config
+          ./Episode Renamer/bin/Release/Episode Renamer.pdb
         draft: false
         prerelease: false
         generate_release_notes: true
